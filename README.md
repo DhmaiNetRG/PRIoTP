@@ -131,18 +131,6 @@ The `docs/eval/` directory contains comprehensive documentation of the protocol'
     └── conf/               Configuration examples
 ```
 
-## Documentation
-
-Technical specification documents are available in the `docs/` directory:
-
-- **spec-001/**: Primary protocol specification with message formats, mechanisms, and subscription protocols
-- **eval/**: Comprehensive evaluation methodology and experimental results
-- **Protocol Diary**: Development notes and design decisions
-- **LEDBAT/**: Documentation on LEDBAT congestion control integration
-- **BSON/**: BSON message encoding specification
-- **ActiveNet/**: Active flow management documentation
-- **DNS/**: Domain name resolution mechanisms
-
 ## Research Contributions
 
 This work presents:
