@@ -1,0 +1,65 @@
+# Documentation
+docs/
+
+# Build artifacts
+*.o
+*.a
+*.so
+*.so.*
+*.dylib
+.libs/
+*.la
+*.lo
+
+# Autotools generated files
+Makefile
+Makefile.in
+configure
+config.h
+config.h.in
+config.log
+config.status
+config.cache
+config.guess
+config.sub
+depcomp
+install-sh
+libtool
+ltmain.sh
+missing
+stamp-h1
+aclocal.m4
+autom4te.cache/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+# Test and runtime artifacts
+*.log
+*.aux
+*.toc
+*.pyc
+__pycache__/
+*.csv
+*.dvi
+*.pdf
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Local testing and logs
+*_log
+temp_*
+q_agent_test
+*.out
+
+# Compiled binaries in application/
+PRTP_client
+PRTP_server

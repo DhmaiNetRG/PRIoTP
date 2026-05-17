@@ -1,4 +1,4 @@
-# PRIoTP: A Novel Partial-Reliable Application Protocol for Internet of Things
+# PRIoTP: A Context-Aware Partial Reliable Application-Layer IoT Protocol with Edge Intelligence
 
 ## Overview
 
@@ -37,7 +37,7 @@ The PRIoTP implementation consists of several core modules:
 
 ### Compilation Steps
 
-1. Navigate to the project root directory and run the configure script:
+1. Navigate to the PRTP directory and run the configure script:
 
 ```bash
 ./configure
@@ -162,6 +162,7 @@ The research will provide solutions for resource-constrained devices, optimizing
 
 See the COPYING file for license information.
 
-## References
+## Contributing
 
-For detailed information about the protocol design, implementation, and evaluation, please refer to the technical specifications and evaluation reports in the `docs/` directory.
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for development workflow, coding expectations, and pull request guidelines.
+

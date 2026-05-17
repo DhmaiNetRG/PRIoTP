@@ -1,1 +1,4 @@
-PRTPserver to get the sensor messages and distribute to clients.
+PRIoTP build/package notes
+
+This file is provided for the install target used by Automake.
+For the project overview, see ../README.md.
