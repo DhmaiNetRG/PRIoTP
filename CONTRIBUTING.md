@@ -5,7 +5,7 @@ Thank you for your interest in contributing to PRIoTP. We welcome bug reports, d
 ## Ways to Contribute
 
 - Report bugs and unexpected behavior
-- Improve documentation in `README.md` and `docs/`
+- Improve documentation in `README.md`
 - Add or improve tests in `PRTP/tests/`
 - Improve protocol modules in `PRTP/src/` and sample apps in `PRTP/application/`
 - Suggest performance, congestion-control, or reliability improvements
