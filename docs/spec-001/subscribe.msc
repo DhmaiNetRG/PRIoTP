@@ -1,9 +1,0 @@
-msc {
-    hscale = "1.5";
-    server,client;
-
-    client->server [label = "subscribe([sensor_id1, sensor_id2, ..])"] ;
-    server->client [label = "subscribe_reply({sensor_id1: OK, sensor_id2: E_NOSUCH, ..})" ];
-
-    
-}
