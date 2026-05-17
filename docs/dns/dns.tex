@@ -1,0 +1,156 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usetheme{default}
+\title{DNS Rebinding Attack}
+\author{Arseny Kurnikov\\
+Hasan Islam\\
+Harri Hämäläinen}
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Introduction}
+    \begin{itemize}
+        \item Same origin policy
+        \item DNS rebinding attack
+        \item DNS rebinding vulnerabilities
+        \item Classes of attacks
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Same origin policy}
+    \begin{itemize}
+        \item Origin of a resource can be expressed in a tuple (schema, host, port)
+            \begin{itemize}
+                \item http://foo.host.example/dir/index.html
+                \item http://foo.host.example/anotherDir/index2.html
+                \item http://bar.host.example/dir/index.html
+                \item https://foo.host.example/dir/index.html
+            \end{itemize}
+        \item The same origin policy is used to control how resources are loaded
+        from one origin and how these resources can interact with each other.
+        \item E.g. a client-side script retrieved from an attacker's host
+        cannot make requests to another host with different origin
+        \begin{itemize}
+            \item ... except when it can (CORS, policy files, form POSTs, CSS /
+            JavaScript files, ...)
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{DNS Rebinding Attack}
+    DNS rebinding attack exploits the DNS service to circumvent the same origin policies. 
+    \begin{enumerate}
+        \item The attacker has a web server serving resources from origin X with
+        corresponding authoritative name server
+        \item A victim retrieves a web page from origin X and
+        resolves the hostname to attacker's web server with a DNS query to
+        attacker's name server. The DNS response is returned with a very small
+        TTL value.
+        \item The loaded page contains more requests to be made to the same origin
+        (origin X); but new DNS query is required due to small TTL value. This
+        time the DNS response is bound to the address of the target web server of
+        the attack.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{DNS Rebinding Attack 2}
+    \begin{itemize}
+        \item DNS rebinding style attacks are known for almost twenty years
+        \begin{itemize}
+            \item In 1996 DNS rebinding exploit was discovered in JVM
+            \footnote{D. Dean, E. W. Felten, and D. S. Wallach. Java
+            security: from HotJava to Netscape and beyond. In
+            IEEE Symposium on Security and Privacy: Oakland,
+            California, May 1996}
+        \end{itemize}
+        \item Allows two major attack vectors
+        \begin{itemize}
+            \item \textbf{Firewall circumvention:} 
+             to access machines behind firewalls. With direct socket access, the
+             attacker can interact with a number of internal services besides
+             HTTP.
+            \item \textbf{IP hijacking:}
+            to access publicly available servers from the client’s IP address.
+            This allows the attacker to take advantage of the target’s implicit
+            or explicit trust in the client’s IP address.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{DNS Rebinding Attack 3}
+    \begin{itemize}
+        \item Usually the accepted solution is to use \textit{DNS pinning} or
+        configure the local DNS subsystem to restrict resolutions to a local
+        network block
+        \begin{itemize}
+            \item \textbf{DNS pinning:} DNS name resolution is cached for a fixed duration, regardless
+            of TTL (e.g. in application level caches)
+        \end{itemize}
+        \item Discussion about DNS rebinding attacks is relevent today as the
+        browsers became application platforms supporting all kinds of
+        third-party addons introducing new ways to exploit DNS rebinding
+        \begin{itemize}
+            \item multi-pin vulnerabilities
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{DNS vulnerabilities}
+    \begin{itemize}
+        \item \textbf{Time-Varying DNS.}  In 2001, the original attack on Java was extended to use use time-varying DNS:
+         \begin{enumerate}
+            \item A client visits a malicious web site, attacker.com,containing JavaScript. The attacker’s DNS server is configured to bind attacker.com to the attacker’s IP address with a very short TTL.
+ 			\item The attacker rebinds attacker.com to the target’s IP address.
+			\item The malicious script uses frames or XMLHttpRequest to connect to attacker.com, which now resolves to the IP address of the target’s server.
+         \end{enumerate}
+         \item \textit{the connection in Step 3 has the same host name as the
+         original malicious script, the browser permits the attacker to read the response from the target.
+}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{DNS vulnerabilities}
+    \begin{itemize}
+        \item \textbf{Flash Player 9.}  Flash Player is vulnerable to the following re-binding attack:
+        \begin{itemize}
+            \item The client’s web browser visits a malicious web site that embeds a SWF movie.
+			\item The SWF movie opens a socket on a port less than 1024 to attacker.com, bound to the attacker’s IP address. Flash Player sends 
+            \begin{verbatim}
+			<policy-file-request />.
+			\end{verbatim}
+         \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{DNS vulnerabilities}
+     \begin{itemize}
+        \item The attacker responds with the following XML:			        
+            \begin{verbatim}
+								 <?xml version="1.0"?> 
+								 <cross-domain-policy>
+								<allow-access-from domain="*" to-ports="*" />
+								</cross-domain-policy> 
+            \end{verbatim}
+        \item The SWF movie opens a socket to an arbitrary port number on attacker.com, which the attacker has rebound to the target’s IP address.
+     \end{itemize}
+    \textit{The policy XML provided by the attacker in step 3 instructs Flash Player to permit arbitrary socket access to attacker.com.}
+\end{frame}
+
+\begin{frame}{Sources}
+    \begin{itemize}
+        \item Jackson, Collin, et al. "Protecting browsers from DNS rebinding attacks." ACM Transactions on the Web (TWEB) 3.1 (2009): 2.
+        \item Ruderman, Jesse, Mozilla developer network, "Same-origin policy",
+        \url{https://developer.mozilla.org/en-US/docs/JavaScript/Same_origin_policy_for_JavaScript}
+        \item D. Dean, E. W. Felten, and D. S. Wallach. Java security: from
+        HotJava to Netscape and beyond. In IEEE Symposium on Security and
+        Privacy: Oakland, California, May 1996
+    \end{itemize}
+\end{frame}
+
+\end{document}

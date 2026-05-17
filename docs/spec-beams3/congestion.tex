@@ -1,0 +1,89 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usetheme{default}
+\title{Protocol Design: Congestion Control}
+\author{Arseny Kurnikov\\
+Hasan Islam\\
+Harri Hämäläinen}
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}{Current implementation status}
+    \begin{itemize}
+        \item Implementation in C
+        \item All protocol messages are implemented except UNSUBSCRIBE
+        \item All sensor updates are sent
+        \item All sensor data is logged on the server and on clients
+        \item Fragmentation not supported (sending camera data as it comes)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Issues}
+    \begin{itemize}
+        \item Packet losses (already observed with only one camera: 94 arrived
+              to the client out of 111 packets)
+        \item Fragmentation
+        \item Reliability
+        \item Congestion
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Fragmentation}
+    \begin{itemize}
+        \item MTU discovery (maybe manually pre-configured to 1500)
+        \item Not tested yet, maybe IP fragmentation will take care of it
+        \item Fragment too big sensor updates into smaller client updates,
+              incrementing client sequence number with each small update
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Reliability}
+    \begin{itemize}
+        \item Optional, requested by the client in SUBSCRIBE
+        \item The server requires ACKs from the client in updates
+        \item ``Weak'': only the last update is reliable
+        \item ``Strong'': requiring all packets in a sequence number range
+              to be delivered boils down to using TCP instead of UDP
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Congestion}
+    \begin{itemize}
+        \item If the subscription is unreliable packet losses can only be observed by clients
+        \item If the subscription is reliable the server treats no ACKs as packet losses
+        \item Nothing can be done with sensors rates, they send as much as they want
+        \item Force client unsubscribe when too congested?
+        \item Send less updates when congested?
+        \item Options:
+        \begin{itemize}
+            \item Loss based congestion control
+            \item Additional signalling with RTT measuring, queue estimating and
+            congestion avoidance
+        \end{itemize}
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Resilience}
+    \begin{itemize}
+        \item Different types of sensors, generic sensor type UNKNOWN. Part
+              of the implementation already, not in the specification yet.
+        
+        \item Sensors that dissappear and reappear. The server does not care,
+              the list of sensors is dynamic. Only IDs should match.
+
+        \item Example, different bitrates of cameras. Should be taken care of by
+              the congestion control.
+
+    \end{itemize}
+\end{frame}
+
+
+
+\end{document}
+

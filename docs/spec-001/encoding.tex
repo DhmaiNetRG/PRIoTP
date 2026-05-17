@@ -1,0 +1,61 @@
+\chapter{Protocol encoding}
+The protocol encoding used in this specification for the communication between the server and
+the clients is a subset of BSON \footnote{http://bsonspec.org}. BSON is a binary
+format in which zero or more key/value pairs are stored as a single entity. BSON
+is used for storing JSON-like data in binary form.
+
+
+The communication between sensors and clients through the server 
+is composed of two parts: between sensors that publish data and the server, and
+between the server and the clients that subscribe to the data. It is important
+to have a suitable encoding for data transmission. JSON is used on communications
+between the server and the sensors.  
+
+% Arseny: this is not part of the specification cause we describe only
+% server-clients interactions.
+
+%\section{Publish Message format}
+
+%Publishers sends JSON-ish messages to server. The message format is as follows:	
+  
+
+
+%\begin{verbatim}
+%  {'dev_id':'gps-12830','sensor_data': '[60.182792, 24.796085]', 
+%  'seq_no': '1', 'ts': '1359537171.82', 'data_size': '22'}	
+%\end{verbatim}
+
+  
+% \begin{description}
+%   \item[$\bullet$ dev$\_$id	] uniquel identifies the sensor
+%   \item[$\bullet$ ts]  denotes the timestamps the data was generated
+%   \item[$\bullet$ seq$\_$no] denotes the sequence number
+%   \item[$\bullet$ size] denotes the size of the sensor data
+% \end{description}
+   
+
+\section{Message format}
+Here are the message examples in JSON format that become BSON after binary
+encoding. Exact format specification is in the following chapter.
+
+\begin{verbatim}
+{'type': 2, 'sids': [{'id': 'gps_1', 'reliable': true},
+{'id': 'camera_1', 'reliable': false}]}
+ 
+{'type': 3, 'sids': [{'id': 'gps_1', 'status': 200},
+{'id': 'camera_1', 'status': 404}]}
+\end{verbatim}
+
+The key \texttt{type} indicates the type of the message. There are the following
+message types.
+\begin{enumerate}
+   \setcounter{enumi}{-1}
+   \item  Sensors list request
+   \item  Sensors list reply
+   \item  Subscribe 
+   \item  Subscribe acknowledgment
+   \item  Update 
+   \item  Update acknowledgment
+   \item  Unsubscribe
+   \item  Keep-alive
+ \end{enumerate}

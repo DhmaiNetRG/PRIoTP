@@ -1,0 +1,154 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usetheme{default}
+\title{Protocol Design Specification}
+\author{Arseny Kurnikov\\
+Hasan Islam\\
+Harri Hämäläinen}
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}{Design Considerations}
+    \begin{itemize}
+        \item Reliability
+        \item Protocol Encoding
+        \item Messages
+        \item Persistence 
+        \item Performance
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Reliability}
+    \begin{itemize}
+        \item Sensor code uses UDP without any guarantee of reliabilty
+        \item In some cases reliable message transport service is needed 
+            \begin{itemize}
+                \item to keep the common view of the sensor state synchronized
+                among several clients
+                \item because the client takes actions based on the received
+                messages e.g. "When OFF device update is received stop the
+                gas flow"
+            \end{itemize}
+        \item In some cases the reliability creates only unnecessary overhead
+            \begin{itemize}
+                \item when the message is soon outdated e.g. data streaming
+            \end{itemize}
+        \item We use \textit{a weak realiable message transport} which
+        guarantees the delivery of the most recent message
+            \begin{itemize}
+                \item Can be switched on / off with a parameter given in
+                subscribe message
+            \end{itemize}
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Protocol Encoding}
+    \begin{itemize}
+        \item JSON for Server and Publisher communication
+        \item BSON for Subscriber and Server communication 
+        \item The most throughput consuming data is binary, hence
+              binary encoding
+        \item Original data is in JSON, so binary representation of JSON
+     \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Subscriber-Server message exchange}
+  \begin{itemize}
+    \item Subscribe \\ \includegraphics[scale=.4]{subscribe.pdf}
+    \item Update \\ \includegraphics[scale=.4]{update.pdf}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Message format}
+  \begin{itemize}
+    \item \texttt{\{'type': integer, 'sids': [\{'id': string, 'reliable': boolean\}, ...]\}}
+    \item \texttt{type} - message type, integer. E.g. get sensor list - 0, sensor list reply - 1.
+    \item \texttt{sids} - sensor id(s), string (list of objects).
+    \item \texttt{data} - update data, depends on the sensor type. E.g. boolean - for device sensors.
+    \item \texttt{time} - update timestamp.
+    \item \texttt{sensor\_type} - the type of a sensor, integer.
+    \item \texttt{reliable} - boolean. In a subscribe message - request for reliable delivery.
+                                       In an update message - request to acknowledge the update.
+    %\item \texttt{\{'type': integer, 'sid': string, 'sensor\_type': integer, 'time':
+    %                integer, 'reliable': boolean, 'data': sensor\_data\}}
+    %\item \texttt{\{'type': integer, 'sid': string, 'sensor\_type': integer, 'time': integer\}}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Messages}
+ \begin{enumerate}
+   \setcounter{enumi}{-1}
+   \item  Sensors list request
+   \item  Sensors list reply
+   \item  Subscribe 
+   \item  Subscribe acknowledgment
+   \item  Update 
+   \item  Update acknowledgment
+   \item  Unsubscribe
+   \item  Keep-alive
+ \end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]{Message examples}
+  \begin{itemize}
+
+    \item From sensors to the server
+       \begin{verbatim}
+  {'dev_id': 'gps-12830',
+  'sensor_data': '[60.182792, 24.796085]',
+  'seq_no': '1', 'ts': '1359537171.82', 
+  'data_size': '22'}  
+       \end{verbatim}
+
+    \item Between the server and clients
+       \begin{verbatim}
+  {'type': 2, 'sids': [{'id': 'gps_1', 
+  'reliable': true}, {'id': 'camera_1'}]}
+
+  {'type': 3, 'sids': [{'id': 'gps_1',
+  'status': 200}, {'id': 'camera_1', 'status': 404}]}
+       \end{verbatim}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Keep alive messaging}
+  \begin{itemize}
+     \item In order to prune "dead" clients
+     \item The client must send a message every keep-alive timeout
+     \item After several timeouts and no message received the server
+           deletes the client from the list
+     \item The client has to re-subscribe
+  \end{itemize}
+\end{frame}
+
+
+%XXX Should it be here, looks rather simplistic
+%XXX - Agree, of course if we have something more to tell about the server
+%design this would be the place
+\begin{frame}{Multiplexing}
+  \begin{itemize}
+     \item All sensors communication is on one UDP port
+     \item All clients communication is on another UDP port
+     \item NAT traversal
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{itemize}
+        \item Questions?
+    \end{itemize}
+\end{frame}
+
+\end{document}
+

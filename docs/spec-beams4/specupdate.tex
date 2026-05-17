@@ -1,0 +1,48 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usetheme{default}
+\title{Protocol Design: Specification Update}
+\author{Arseny Kurnikov\\
+Hasan Islam\\
+Harri Hämäläinen}
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}{Specification updates}
+    \begin{itemize}
+        \item Added a protocol version field to headers
+        \item Added fields for fragmentation for messages which require
+        fragmentation
+        \item High-level description on congestion control, still figuring out
+        how to implemented this in a smart way
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Current implementation status}
+    \begin{itemize}
+        \item Implementation in C
+        \item Protocol encoding in (BJSON) implemented
+        \item Basic protocol mechanisms implemented (subscribe, update,
+        keep-alive, ...)
+        \item Fragmentation mostly implemented
+        \item TODO: Congestion control 
+        \item TODO: Packet loss generator
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Open issues}
+    \begin{itemize}
+        \item If versions do not match, maybe negotiate versions at the beginning,
+              so backward compatibility is sustained
+        \item Congestion control, going to be loss-based, loss of a fragment
+        causes retransmission of the fragment / whole packet
+    \end{itemize}
+\end{frame}
+
+\end{document}
+

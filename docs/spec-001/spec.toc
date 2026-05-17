@@ -1,0 +1,18 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Revision log and open issues}{2}
+\contentsline {section}{\numberline {1.1}Open issues}{2}
+\contentsline {section}{\numberline {1.2}Revision log}{2}
+\contentsline {chapter}{\numberline {2}Introduction}{3}
+\contentsline {chapter}{\numberline {3}Protocol mechanisms}{4}
+\contentsline {chapter}{\numberline {4}Protocol encoding}{6}
+\contentsline {section}{\numberline {4.1}Message format}{6}
+\contentsline {chapter}{\numberline {5}Protocol messages}{8}
+\contentsline {section}{\numberline {5.1}Listing available sensors}{8}
+\contentsline {section}{\numberline {5.2}Subscribing}{8}
+\contentsline {section}{\numberline {5.3}Receiving updates}{9}
+\contentsline {section}{\numberline {5.4}Unsubscribing}{10}
+\contentsline {section}{\numberline {5.5}Keep-alive messaging}{10}
+\contentsline {chapter}{\numberline {6}Congestion control}{11}
+\contentsline {subsection}{\numberline {6.0.1}Skipping messages}{11}
+\contentsline {subsection}{\numberline {6.0.2}Throttling down the sending rate}{12}
+\contentsline {subsection}{\numberline {6.0.3}After thoughts about about our congestion control design}{12}

@@ -1,0 +1,105 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usetheme{default}
+\title{Binary JSON (BSON)}
+\author{Arseny Kurnikov\\
+Hasan Islam\\
+Harri Hämäläinen}
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Binary JSON}
+    \begin{itemize}
+        \item General purpose, binary encoded serialization format for JSON-ish data
+        \item Supports all JSON types + binary
+        \item Lightweight - minimum spatial overhead 
+        \item Traversable - can skip some entries when parsing
+        \item Efficient - quick encoding and decoding
+        \item Easy to be implemented (partially) in most common environments
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Lightweight}
+    \begin{itemize}
+        \item Minimize spatial overhead
+        \item Adds overhead for faster traverse
+        \item Human readability lost
+        \item Saves up to 25\% space compared to JSON (though sometimes takes more than JSON)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Traversable}
+    \begin{itemize}
+        \item Length prefixes for elements
+        \begin{itemize}
+            \item \texttt{document ::= int32 e\_list "\textbackslash x00"}
+            \item \texttt{string ::= int32 (byte*) "\textbackslash x00"}
+        \end{itemize}
+        \item Element types
+        \begin{itemize}
+            \item \texttt{element ::= "\textbackslash x01" e\_name double}
+            \item \texttt{| "\textbackslash x02" e\_name string}
+            \item \texttt{| "\textbackslash x03" e\_name document}
+            \item \texttt{| "\textbackslash x04" e\_name document} (array)
+            \item \texttt{| "\textbackslash x05" e\_name binary}
+            \item \texttt{\dots}
+            \item \texttt{e\_name ::= cstring}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Efficient}
+    \begin{itemize}
+        \item C data types: \texttt{byte}, \texttt{int32}, \texttt{int64}
+                            \texttt{double}
+        \item Little-endian
+        \item No need to parse text to encode/decode an integer or double
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Examples}
+\begin{verbatim}
+    {"hello": "world"}
+    "\x16\x00\x00\x00\x02hello\x00
+    \x06\x00\x00\x00world\x00\x00"
+\end{verbatim}
+    \begin{itemize}
+        \item \texttt{\textbackslash x16\textbackslash x00\textbackslash x00\textbackslash x00}, length of the document is 22 bytes
+        \item \texttt{\textbackslash x02}, string type (2)
+        \item \texttt{\textbackslash x06\textbackslash x00\textbackslash x00\textbackslash x00}, the length of string is 6 bytes (including the terminating character)
+    \end{itemize}
+
+\begin{verbatim}
+    {'a': 'foo', 'b': 1984}
+    '\x17\x00\x00\x00\x02a\x00\x04\x00\x00\x00foo\x00
+     \x10b\x00\xc0\x07\x00\x00\x00'
+\end{verbatim}
+
+    \begin{itemize}
+        \item Little-endian, (0x07 $<<$ 8) + 0xc0 = 1984
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Discussion}
+    \begin{itemize}
+        \item Based on JSON
+        \item Readability: easily converted to JSON
+        \item Suitable for both text and binary
+        \item Bigger overhead in some cases
+        \item Faster to parse
+        \item Two string types (null terminated string with length prefix and null terminated cstring without length prefix)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Sources}
+    \begin{itemize}
+        \item BSON Specification, \url{http://bsonspec.org/}
+    \end{itemize}
+\end{frame}
+
+\end{document}

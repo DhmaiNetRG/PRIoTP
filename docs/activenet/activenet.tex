@@ -1,0 +1,100 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usetheme{default}
+\title{Active Networks}
+\author{Arseny Kurnikov\\
+Hasan Islam\\
+Harri Hämäläinen}
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}[fragile]{Goals of Active Networks}
+	\begin{itemize}
+		\item Create a dynamic and extensible communications environment that allow application specific customization.
+		\item Introduce Programmable open nodes with the ability to deploy programs dynamically into node engines.
+        \item Some use cases:
+        \begin{itemize}
+            \item Data distribution and aggregation
+            \item Active network management and measurement
+            \item Network security and protection
+        \end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Active Networks}
+    \begin{itemize}
+        \item Applications can add code into packets which can be executed by
+        the communication hardware to provide dynamic behaviour tailored for the
+        application needs.
+		\item The Discrete Approach: programs are injected into active network node separately from actual data packet
+		\item The Integrated Approach: program is integrated into every packet of data
+    \end{itemize}
+    \begin{verbatim}
+ +--------+------+         +--------+------+------+
+ | Header | Data |   -->   | Header | Code | Data |
+ +--------+------+         +--------+------+------+
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}{Code}
+  Goals
+	\begin{itemize}
+		\item Mobility
+    \item Safety
+    \item Efficiency
+	\end{itemize}
+  Possible solutions
+  \begin{itemize}
+    \item Source code
+    \item Intermediate code (Java)
+    \item Binary code (platform-dependent)
+    \item On-the-fly compilation
+  \end{itemize}
+	
+\end{frame}
+
+\begin{frame}{End-to-end argument and active networking}
+    \begin{itemize}
+        \item \textit{''application-specific functions ought to reside in the end hosts
+        of a network rather than in intermediary nodes – provided they can be
+        implemented \textbf{completely and correctly} in the end hosts''} - End-to-end
+        principle
+        \item On one hand the programmability of the network breaks the
+        end-to-end principle
+        \item On the otherhand the tailored service exactly for the application
+        needs is in a sense the ''correct'' method.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Tradeoffs}
+    \begin{itemize}
+        \item Security
+        		\begin{itemize}
+        			\item who can execute code where?
+        			\item how do you limit what actions can be taken?
+        			\item who is allowed to send code to the routers?
+        		\end{itemize}
+        \item Performance
+        			\begin{itemize}
+        				\item monopolizing the processor by a malicious piece of code
+        				\item expensive verification, while loading code into memory probably, enough to slow down the system and cause momentary performance loss
+        			\end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Sources}
+    \begin{itemize}
+        \item A Survey of Active Network Research, Tennenhouse et al. 1997
+        \item SANDS: Specialized Active Networking for Distributed Simulation,
+        Zabele et al., 2002
+        \item Active Networking and End-To-End Arguments, Reed, Saltzer, and
+        Clark
+    \end{itemize}
+\end{frame}
+
+\end{document}

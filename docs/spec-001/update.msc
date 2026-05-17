@@ -1,0 +1,17 @@
+msc {
+    hscale = "1.5";
+    sensors,server,client;
+    server box client [ label = "Subscription to SID1 is unreliable, SID2 is reliable" ];
+
+    sensors->server [label = "publish(data)"];
+    server->client [label = "update([id: SID1, clock: TIME1, data: ...])"] ;
+    sensors->server [label = "publish(data)"];
+    server-xclient [label = "update([id: SID1, clock: TIME2, data: ...])"] ;
+
+    sensors->server [label = "publish(data)"];
+    server-xclient [label = "update([id: SID2, clock: TIME3, data: ...])"] ;
+    server box client  [ label = "Timer for client subscription of SID2 expires" ];
+    server->client [label = "update([id: SID2, clock: TIME3, data: ...])"] ;
+    client->server [label = "update_ack([id: SID2, ack: TIME3])"] ;
+    
+}

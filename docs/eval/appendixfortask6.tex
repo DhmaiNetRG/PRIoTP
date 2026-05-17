@@ -1,0 +1,81 @@
+\chapter{Temperature sensor results for task 6}
+\label{appendix:task6}
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+client & E[D] & max(D) & min(D) & Var(D) & E[s] & max(s) & Var(s) & plr\\
+\hline
+500kbs 0.05 & 0.012 & 0.060 & 0.000 & 0.000 & 0.475 & 7.000 & 2.185 & 0.12 \\
+\hline
+500kbs 0.15 & 0.008 & 0.060 & 0.000 & 0.000 & 0.237 & 3.000 & 0.460 & 0.13 \\
+\hline
+100kbs 0.05 & 1.169 & 4.120 & 0.020 & 1.875 & 1.441 & 7.000 &  3.078 & 0.20  \\
+\hline
+100kbs 0.15 & 0.390 & 2.520 & 0.020 & 0.426 & 1.475 & 10.000 & 5.771 & 0.38 \\
+\hline
+\end{tabular}
+\caption{Task 6: Receive statistics (delay[D], skew[s], packet loss rate [plr]) for temperature sensor data (no realibility guarantees, no congestion control)}
+\label{table:task6-temp-a}
+\end{table}
+
+
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+client & E[D] & max(D) & min(D) & Var(D) & E[s] & max(s) & Var(s) & plr\\
+\hline
+500kbs 0.05 & 0.024 & 0.430 & 0.000 & 0.005 & 0.000 & 0.000 & 0.000 & 0.00 \\
+\hline
+500kbs 0.15 & 0.067 & 0.680 & 0.000 & 0.021 & 0.000 & 0.000 & 0.000 & 0.00 \\
+\hline
+100kbs 0.05 & 1.309 & 2.570 & 0.020 & 0.460 & 0.966 & 2.000 & 0.309 & 0.05 \\
+\hline
+100kbs 0.15 & 1.221 & 2.470 & 0.020 & 0.337 & 0.847 & 2.000 & 0.269 & 0.03 \\
+\hline
+\end{tabular}
+\caption{Task 6: Receive statistics (delay[D], skew[s], packet loss rate [plr]) for temperature sensor data (weakly reliable transport, no congestion control) }
+\label{table:task6-camera-c}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+client      & E[D]  & max(D) & min(D) & Var(D) & E[s] & max(s) & Var(s) & plr\\
+\hline
+500kbs 0.05 & 0.009 & 0.050 & 0.000 & 0.000 & 0.068 & 1.000 & 0.000 & 0.08 \\
+\hline
+500kbs 0.15 & 0.008 & 0.050 & 0.000 & 0.000 & 1.085 & 9.000 & 4.320 & 0.37\\
+\hline
+100kbs 0.05 & 0.650 & 3.970 & 0.020 & 1.521 & 0.627 & 3.000 & 1.100 & 0.12\\
+\hline
+100kbs 0.15 & 0.654 & 3.670 & 0.020 & 1.476 & 1.458 & 8.000& 3.528 & 0.43\\
+\hline
+\end{tabular}
+\caption{Task 6: Receive statistics (delay[D], skew[s], packet loss rate [plr]) for temperature sensor data (no reliability guarantees, skipping messages}
+\label{table:task6-tmp-c}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+client & E[D] & max(D) & min(D) & Var(D) & E[s] & max(s) & Var(s) & plr\\
+\hline
+500kbs 0.05 & 0.024 & 0.390 & 0.000 & 0.004 & 0.000 & 0.000 & 0.000 & 0.000 \\
+\hline
+500kbs 0.15 & 0.048 & 0.330 & 0.000 & 0.009 & 0.000 & 0.000 & 0.000 & 0.000 \\
+\hline
+100kbs 0.05 & 1.307 & 3.100 & 0.020 & 0.653 & 0.966 & 3.000 & 0.482 & 0.03\\
+\hline
+100kbs 0.15 & 1.443 & 2.910 & 0.020 & 0.404 & 1.034 & 2.000 & 0.309 & 0.05\\
+\hline
+\end{tabular}
+\caption{Task 6: Receive statistics (delay[D], skew[s], packet loss rate [plr]) for temperature sensor data (weakly reliable transport, skipping messages)}
+\label{table:task6-temp-e}
+\end{table}
+
