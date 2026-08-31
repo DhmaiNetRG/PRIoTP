@@ -1,0 +1,49 @@
+[HSK_START] session=0 client sending SUBSCRIBE
+[95m [1788194693.185800] Transport: [0mReceived 109 bytes
+[0m[HSK_SUCCESS] session=1 client extracted session key
+[95m [1788194693.191302] Transport: [0mPRIoTPS: Session 1 successfully registered on client.
+[0m[HSK_ACK] session=1 client sending compact ACK
+[95m [1788194693.192894] BSON Message: [0mBSON msg: serializing.
+[0m[95m [1788194693.193293] BSON Message: [0mBSON msg: serializing.
+[0m[95m [1788194693.193686] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194693.194146] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194698.205070] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194698.206212] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194698.206594] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194703.212963] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194703.213670] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194703.214087] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194708.219687] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194708.220333] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194708.220712] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194713.226179] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194713.226754] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194713.227127] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194718.232106] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194718.232777] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194718.233434] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194723.238930] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194723.239506] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194723.239898] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194728.245339] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194728.245932] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194728.246310] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194733.251752] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194733.252410] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194733.252938] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194738.258473] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194738.259047] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194738.259430] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194743.264723] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194743.265311] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194743.265669] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194748.271072] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194748.271731] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194748.272115] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194753.273418] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194753.274158] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194753.274699] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194758.282383] Client: [0mTimeout reached, sending keep_alive.
+[0m[95m [1788194758.283092] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m[95m [1788194758.283665] BSON Message: [0m---Sending subscribe by serializing PRTP packet to bson bsg.------
+[0m

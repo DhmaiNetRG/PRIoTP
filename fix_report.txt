@@ -1,0 +1,6 @@
+Root Cause:
+The post-handshake state machine was broken due to two critical NULL pointer dereferences in the server's main event loop. When the server successfully receives and processes the 5-byte Handshake ACK packet in clients.c:read_client(), it consumes the packet and returns *msg = NULL. However, the main loop in PRTP_server.c passes this NULL message to on_client_msg(), which immediately dereferences msg->type, causing a fatal segmentation fault. The server crashes the moment a handshake completes successfully.
+
+Furthermore, ree_iotmsg() lacked a NULL check, causing another crash vector when attempting to free the NULL message. 
+
+Additionally, on the client side, 	ransport.c attempted to use sendto with a destination address on a connected UDP socket to send the ACK, which yields an EISCONN error on some OS network stacks, dropping the ACK silently.
