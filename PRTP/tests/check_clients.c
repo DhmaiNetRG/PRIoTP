@@ -68,3 +68,7 @@ main (void)
   return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
+int q_learning_enabled = 0;
+
+#include "../src/q_agent.h"
+q_agent_t server_q_agent;

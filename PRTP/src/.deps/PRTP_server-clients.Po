@@ -20,18 +20,23 @@
  /usr/include/x86_64-linux-gnu/bits/endian.h \
  /usr/include/x86_64-linux-gnu/bits/endianness.h \
  /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/bits/select-decl.h ../src/transport.h \
+ /usr/include/x86_64-linux-gnu/bits/select-decl.h /usr/include/time.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+ /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h ../src/transport.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
  /usr/include/netinet/in.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/sys/socket.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
  /usr/include/x86_64-linux-gnu/bits/socket.h \
  /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h /usr/include/endian.h \
  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
@@ -60,7 +65,7 @@
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h ../src/void_data.h \
- ../src/fragment_buffer.h /usr/include/stdio.h \
+ ../src/fragment_buffer.h ../src/telemetry.h /usr/include/stdio.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
@@ -80,8 +85,6 @@
  /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
@@ -92,10 +95,14 @@
  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
  /usr/include/x86_64-linux-gnu/bits/unistd.h \
  /usr/include/x86_64-linux-gnu/bits/unistd-decl.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h ../src/utils.h \
- ../src/bson_parser.h ../src/bson_msg.h ../src/subscriptions.h \
- ../src/sensors.h ../src/sensor_types.h ../src/logger.h \
- ../src/clients_config.h
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h /usr/include/arpa/inet.h \
+ ../src/utils.h ../src/bson_parser.h ../src/bson_msg.h \
+ ../src/subscriptions.h ../src/sensors.h ../src/sensor_types.h \
+ ../src/logger.h ../src/clients_config.h ../src/security.h \
+ ../src/security/security_core/security_core.h \
+ ../src/security/security_core/../identity/identity.h \
+ ../src/security/security_core/../session/session.h \
+ ../src/security/seh/seh.h
 /usr/include/stdc-predef.h:
 ../src/clients.h:
 /usr/include/x86_64-linux-gnu/sys/time.h:
@@ -121,18 +128,24 @@
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 /usr/include/x86_64-linux-gnu/bits/select2.h:
 /usr/include/x86_64-linux-gnu/bits/select-decl.h:
+/usr/include/time.h:
+/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
+/usr/include/x86_64-linux-gnu/bits/time.h:
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
+/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 ../src/transport.h:
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h:
 /usr/include/netinet/in.h:
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 /usr/include/x86_64-linux-gnu/sys/socket.h:
 /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h:
-/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
 /usr/include/x86_64-linux-gnu/bits/socket.h:
 /usr/include/x86_64-linux-gnu/sys/types.h:
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 /usr/include/endian.h:
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
@@ -167,6 +180,7 @@
 /usr/include/x86_64-linux-gnu/bits/stdint-least.h:
 ../src/void_data.h:
 ../src/fragment_buffer.h:
+../src/telemetry.h:
 /usr/include/stdio.h:
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
@@ -190,8 +204,6 @@
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 /usr/include/x86_64-linux-gnu/bits/stdlib.h:
 /usr/include/string.h:
-/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 /usr/include/strings.h:
 /usr/include/x86_64-linux-gnu/bits/strings_fortified.h:
 /usr/include/x86_64-linux-gnu/bits/string_fortified.h:
@@ -204,6 +216,7 @@
 /usr/include/x86_64-linux-gnu/bits/unistd.h:
 /usr/include/x86_64-linux-gnu/bits/unistd-decl.h:
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
+/usr/include/arpa/inet.h:
 ../src/utils.h:
 ../src/bson_parser.h:
 ../src/bson_msg.h:
@@ -212,3 +225,8 @@
 ../src/sensor_types.h:
 ../src/logger.h:
 ../src/clients_config.h:
+../src/security.h:
+../src/security/security_core/security_core.h:
+../src/security/security_core/../identity/identity.h:
+../src/security/security_core/../session/session.h:
+../src/security/seh/seh.h:

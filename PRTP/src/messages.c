@@ -175,6 +175,7 @@ void free_iotsids(struct PRTP_packet* msg)
 /* Free PRTP_packet structure. */
 void free_iotmsg(struct PRTP_packet* msg)
 {
+  if (msg == NULL) return;
   free_iotsids(msg);
   free(msg);
 }

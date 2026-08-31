@@ -74,6 +74,19 @@ int handshake_server_build_response(
 {
     if (!server_id || !client_pub || !table || !out_pkt || !out_pkt_len) return -1;
 
+    /* FIX 3: Validate Public Key Before Session Creation */
+    int is_zero = 1;
+    for (int i = 0; i < 32; i++) {
+        if (client_pub[i] != 0) {
+            is_zero = 0;
+            break;
+        }
+    }
+    if (is_zero) {
+        hsk_log_failure("Invalid client public key (all zeros)");
+        return -1;
+    }
+
     hsk_log("HSK_START", 0, "server building response");
 
     priotps_session_t *session = session_create(table, client_pub);
@@ -82,6 +95,8 @@ int handshake_server_build_response(
         return -1;
     }
 
+    /* Print required log directly to stdout/stderr */
+    fprintf(stderr, "PRIoTPS: Session created\n");
     hsk_log("SESSION_CREATED", session->session_id, NULL);
 
     /*
@@ -113,6 +128,8 @@ int handshake_server_build_response(
         session_delete(session);
         return -1;
     }
+
+    fprintf(stderr, "PRIoTPS: SCT generated\n");
 
     /* Build SEH_HSK wire packet: [flags][nonce(8)][server_pub(32)][SCT] */
     seh_handshake_t seh;
@@ -153,6 +170,7 @@ int handshake_client_process_response(
     size_t payload_len = 0;
 
     if (seh_hsk_decode(pkt, pkt_len, &seh, &payload_off, &payload_len) != 0) {
+        fprintf(stderr, "HSK_FAIL:\n    Invalid SCT\n");
         hsk_log_failure("seh_hsk_decode failed");
         return -1;
     }
@@ -164,6 +182,7 @@ int handshake_client_process_response(
     size_t ct1_len = 0;
     if (ecies_decrypt_with_priv(pkt + payload_off, payload_len,
                                  client_id->private_key, ct1, &ct1_len) != 0) {
+        fprintf(stderr, "HSK_FAIL:\n    ECIES outer decrypt failed\n");
         hsk_log_failure("ECIES outer decrypt failed");
         return -1;
     }
@@ -172,11 +191,13 @@ int handshake_client_process_response(
     uint8_t inner_plain[HANDSHAKE_INNER_PAYLOAD_SIZE];
     size_t inner_len = 0;
     if (ecies_decrypt_with_pub(ct1, ct1_len, seh.pub_key, inner_plain, &inner_len) != 0) {
+        fprintf(stderr, "HSK_FAIL:\n    ECIES inner decrypt failed\n");
         hsk_log_failure("ECIES inner decrypt failed");
         return -1;
     }
 
     if (inner_len != HANDSHAKE_INNER_PAYLOAD_SIZE) {
+        fprintf(stderr, "HSK_FAIL:\n    Session key extraction failed\n");
         hsk_log_failure("inner payload size mismatch");
         return -1;
     }

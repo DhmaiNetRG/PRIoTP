@@ -55,9 +55,11 @@ priotps_session_t *session_find(priotps_session_table_t *table, uint32_t session
     if (!table) return NULL;
     for (int i = 0; i < SESSION_MAX_ENTRIES; i++) {
         if (table->entries[i].active && table->entries[i].session_id == session_id) {
+            fprintf(stderr, "AUDIT: SESSION_LOOKUP sid=%u found=%p\n", session_id, (void*)&table->entries[i]);
             return &table->entries[i];
         }
     }
+    fprintf(stderr, "AUDIT: SESSION_LOOKUP sid=%u found=(nil)\n", session_id);
     return NULL;
 }
 

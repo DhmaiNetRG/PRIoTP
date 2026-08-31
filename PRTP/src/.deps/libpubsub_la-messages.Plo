@@ -89,7 +89,11 @@
  /usr/include/x86_64-linux-gnu/bits/time.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
- ../src/sensor_types.h ../src/logger.h ../src/security.h ../src/ascon.h
+ ../src/sensor_types.h ../src/logger.h ../src/security.h \
+ ../src/security/security_core/security_core.h \
+ ../src/security/security_core/../identity/identity.h \
+ ../src/security/security_core/../session/session.h \
+ ../src/security/seh/seh.h
 /usr/include/stdc-predef.h:
 ../src/messages.h:
 /usr/include/x86_64-linux-gnu/sys/types.h:
@@ -195,4 +199,7 @@
 ../src/sensor_types.h:
 ../src/logger.h:
 ../src/security.h:
-../src/ascon.h:
+../src/security/security_core/security_core.h:
+../src/security/security_core/../identity/identity.h:
+../src/security/security_core/../session/session.h:
+../src/security/seh/seh.h:

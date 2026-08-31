@@ -140,6 +140,18 @@ int security_core_server_handle_subscribe(
         return -1;
     }
 
+    /* FIX 3: Validate Public Key Before Session Creation */
+    int is_zero = 1;
+    for (int i = 0; i < 32; i++) {
+        if (hsk.pub_key[i] != 0) {
+            is_zero = 0;
+            break;
+        }
+    }
+    if (is_zero) {
+        return -1;
+    }
+
     /* Build response: create session + double-ECIES encrypt session key */
     if (handshake_server_build_response(
             &ctx->identity,
@@ -231,6 +243,8 @@ priotps_session_t *security_core_add_client_session(
     memcpy(s->server_pubkey, server_pub, 32);
     s->last_seen  = (uint64_t)time(NULL);
     s->active     = 1;
+    s->state      = SESSION_ESTABLISHED;
+    fprintf(stderr, "AUDIT: SESSION_ADD sid=%u active=%u state=%u\n", s->session_id, s->active, s->state);
     telemetry_session_created(session_id);
 
     return s;
@@ -266,11 +280,13 @@ int security_core_server_process_ack(
                 |  (uint32_t)in_pkt[4];
         } else if (in_len >= SEH_HSK_OVERHEAD) {
             /* Legacy format: pub_key at bytes [9..40] */
-            const uint8_t *client_pub = in_pkt + 9;
-            priotps_session_t *s = session_find_by_peer(&ctx->sessions, client_pub);
+            priotps_session_t *s = session_find_by_peer(&ctx->sessions, in_pkt + 9);
             if (s) sid = s->session_id;
         }
-        if (sid) telemetry_handshake_success(sid, 0.0);
+        if (sid != 0) {
+            fprintf(stderr, "AUDIT: SERVER_ACK sid=%u\n", sid);
+            telemetry_handshake_success(sid, 0.0);
+        }
     }
     return ret;
 }

@@ -116,10 +116,14 @@ PRTP_server-PRTP_server.o: PRTP_server.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h ../src/logger.h \
  ../src/void_data.h ../src/messages.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h ../src/clients.h \
- /usr/include/x86_64-linux-gnu/sys/time.h ../src/transport.h \
- ../src/fragment_buffer.h ../src/bson_parser.h ../src/sensor_parser.h \
- ../src/logger.h ../src/utils.h ../src/sensor_logger.h \
- ../src/clients_config.h ../src/q_agent.h
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/time.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
+ ../src/transport.h ../src/fragment_buffer.h ../src/telemetry.h \
+ ../src/bson_parser.h ../src/sensor_parser.h ../src/logger.h \
+ ../src/utils.h ../src/sensor_logger.h ../src/clients_config.h \
+ ../src/q_agent.h ../src/telemetry.h
 /usr/include/stdc-predef.h:
 /usr/include/unistd.h:
 /usr/include/features.h:
@@ -255,8 +259,13 @@ PRTP_server-PRTP_server.o: PRTP_server.c /usr/include/stdc-predef.h \
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h:
 ../src/clients.h:
 /usr/include/x86_64-linux-gnu/sys/time.h:
+/usr/include/time.h:
+/usr/include/x86_64-linux-gnu/bits/time.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 ../src/transport.h:
 ../src/fragment_buffer.h:
+../src/telemetry.h:
 ../src/bson_parser.h:
 ../src/sensor_parser.h:
 ../src/logger.h:
@@ -264,3 +273,4 @@ PRTP_server-PRTP_server.o: PRTP_server.c /usr/include/stdc-predef.h \
 ../src/sensor_logger.h:
 ../src/clients_config.h:
 ../src/q_agent.h:
+../src/telemetry.h:

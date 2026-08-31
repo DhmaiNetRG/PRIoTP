@@ -77,7 +77,10 @@
  /usr/include/x86_64-linux-gnu/bits/stdio2-decl.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/stdio2.h ../src/bson_parser.h \
- ../src/security.h ../src/ascon.h /usr/include/stdlib.h \
+ ../src/security.h ../src/security/security_core/security_core.h \
+ ../src/security/security_core/../identity/identity.h \
+ ../src/security/security_core/../session/session.h \
+ ../src/security/seh/seh.h ../src/telemetry.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
@@ -87,7 +90,14 @@
  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/string.h /usr/include/strings.h \
+ /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+ /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h \
+ /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /usr/include/arpa/inet.h
 /usr/include/stdc-predef.h:
 ../src/transport.h:
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h:
@@ -179,7 +189,11 @@
 /usr/include/x86_64-linux-gnu/bits/stdio2.h:
 ../src/bson_parser.h:
 ../src/security.h:
-../src/ascon.h:
+../src/security/security_core/security_core.h:
+../src/security/security_core/../identity/identity.h:
+../src/security/security_core/../session/session.h:
+../src/security/seh/seh.h:
+../src/telemetry.h:
 /usr/include/stdlib.h:
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
@@ -193,3 +207,14 @@
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+/usr/include/string.h:
+/usr/include/strings.h:
+/usr/include/x86_64-linux-gnu/bits/strings_fortified.h:
+/usr/include/x86_64-linux-gnu/bits/string_fortified.h:
+/usr/include/errno.h:
+/usr/include/x86_64-linux-gnu/bits/errno.h:
+/usr/include/linux/errno.h:
+/usr/include/x86_64-linux-gnu/asm/errno.h:
+/usr/include/asm-generic/errno.h:
+/usr/include/asm-generic/errno-base.h:
+/usr/include/arpa/inet.h:

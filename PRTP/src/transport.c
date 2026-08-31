@@ -616,9 +616,15 @@ int transport_receive(struct transport* transport, struct PRTP_packet** msg,
           if (from != NULL && fromlen != NULL && *fromlen > 0) {
             sent = sendto(transport->sd, (const char *)ack_pkt, ack_len, 0,
                           (struct sockaddr *)from, *fromlen);
+            if (sent < 0 && errno == EISCONN) {
+                sent = send(transport->sd, (const char *)ack_pkt, ack_len, 0);
+            }
           } else if (transport->addr_len > 0) {
             sent = sendto(transport->sd, (const char *)ack_pkt, ack_len, 0,
                           (struct sockaddr *)&transport->addr, transport->addr_len);
+            if (sent < 0 && errno == EISCONN) {
+                sent = send(transport->sd, (const char *)ack_pkt, ack_len, 0);
+            }
           } else {
             sent = send(transport->sd, (const char *)ack_pkt, ack_len, 0);
           }

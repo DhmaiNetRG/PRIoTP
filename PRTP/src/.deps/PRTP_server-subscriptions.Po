@@ -75,14 +75,17 @@
  /usr/include/x86_64-linux-gnu/bits/stdio2.h ../src/void_data.h \
  ../src/messages.h /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
  ../src/clients.h /usr/include/x86_64-linux-gnu/sys/time.h \
- ../src/transport.h ../src/fragment_buffer.h /usr/include/stdlib.h \
+ /usr/include/time.h /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h ../src/transport.h \
+ ../src/fragment_buffer.h ../src/telemetry.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
@@ -182,8 +185,15 @@
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h:
 ../src/clients.h:
 /usr/include/x86_64-linux-gnu/sys/time.h:
+/usr/include/time.h:
+/usr/include/x86_64-linux-gnu/bits/time.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
+/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 ../src/transport.h:
 ../src/fragment_buffer.h:
+../src/telemetry.h:
 /usr/include/stdlib.h:
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
@@ -192,8 +202,6 @@
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 /usr/include/x86_64-linux-gnu/bits/stdlib.h:
 /usr/include/string.h:
-/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 /usr/include/strings.h:
 /usr/include/x86_64-linux-gnu/bits/strings_fortified.h:
 /usr/include/x86_64-linux-gnu/bits/string_fortified.h:

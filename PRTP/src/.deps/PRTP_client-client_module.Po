@@ -95,7 +95,11 @@
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h ../src/client_module.h \
  ../src/messages.h ../src/void_data.h ../src/bson_msg.h \
  ../src/subscriptions.h ../src/sensors.h ../src/sensor_types.h \
- ../src/clients.h ../src/transport.h ../src/fragment_buffer.h
+ ../src/clients.h /usr/include/time.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
+ ../src/transport.h ../src/fragment_buffer.h ../src/telemetry.h
 /usr/include/stdc-predef.h:
 /usr/include/stdlib.h:
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
@@ -211,5 +215,10 @@
 ../src/sensors.h:
 ../src/sensor_types.h:
 ../src/clients.h:
+/usr/include/time.h:
+/usr/include/x86_64-linux-gnu/bits/time.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 ../src/transport.h:
 ../src/fragment_buffer.h:
+../src/telemetry.h:

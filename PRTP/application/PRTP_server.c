@@ -121,6 +121,10 @@ int on_client_msg(struct client_node* node, const struct PRTP_packet *msg, struc
   struct PRTP_packet* list_resp_msg;
   *response = NULL;
 
+  if (msg == NULL) {
+      return 0;
+  }
+
   if( msg->type == LIST ) {
     list_resp_msg = create_iotmsg(LIST_RESPONSE);
     write_sensor_list( list_resp_msg );

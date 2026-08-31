@@ -12,7 +12,8 @@ libpubsub_la_SOURCES = ../src/logger.c ../src/utils.c ../src/messages.c ../src/b
 					  ../src/security/identity/identity.c \
 					  ../src/security/session/session.c \
 					  ../src/security/handshake/handshake.c \
-					  ../src/security/security_core/security_core.c
+					  ../src/security/security_core/security_core.c \
+					  ../src/telemetry.c
 
 bin_PROGRAMS = PRTP_server PRTP_client q_agent_test
 

@@ -127,7 +127,8 @@ am_libpubsub_la_OBJECTS = ../src/libpubsub_la-logger.lo \
 	../src/security/identity/libpubsub_la-identity.lo \
 	../src/security/session/libpubsub_la-session.lo \
 	../src/security/handshake/libpubsub_la-handshake.lo \
-	../src/security/security_core/libpubsub_la-security_core.lo
+	../src/security/security_core/libpubsub_la-security_core.lo \
+	../src/libpubsub_la-telemetry.lo
 libpubsub_la_OBJECTS = $(am_libpubsub_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -196,6 +197,7 @@ am__depfiles_remade = ../src/$(DEPDIR)/PRTP_client-active_flow.Po \
 	../src/$(DEPDIR)/libpubsub_la-security.Plo \
 	../src/$(DEPDIR)/libpubsub_la-sensor_logger.Plo \
 	../src/$(DEPDIR)/libpubsub_la-sensor_types.Plo \
+	../src/$(DEPDIR)/libpubsub_la-telemetry.Plo \
 	../src/$(DEPDIR)/libpubsub_la-transport.Plo \
 	../src/$(DEPDIR)/libpubsub_la-utils.Plo \
 	../src/$(DEPDIR)/libpubsub_la-validator.Plo \
@@ -399,7 +401,8 @@ libpubsub_la_SOURCES = ../src/logger.c ../src/utils.c ../src/messages.c ../src/b
 					  ../src/security/identity/identity.c \
 					  ../src/security/session/session.c \
 					  ../src/security/handshake/handshake.c \
-					  ../src/security/security_core/security_core.c
+					  ../src/security/security_core/security_core.c \
+					  ../src/telemetry.c
 
 PRTP_server_SOURCES = PRTP_server.c ../src/sensors.h ../src/sensors.c ../src/clients.h ../src/clients.c \
 	../src/sensor_parser.h ../src/sensor_parser.c ../src/subscriptions.h ../src/subscriptions.c ../src/clients_config.h ../src/clients_config.c \
@@ -610,6 +613,8 @@ clean-noinstLTLIBRARIES:
 ../src/security/security_core/libpubsub_la-security_core.lo:  \
 	../src/security/security_core/$(am__dirstamp) \
 	../src/security/security_core/$(DEPDIR)/$(am__dirstamp)
+../src/libpubsub_la-telemetry.lo: ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
 
 libpubsub.la: $(libpubsub_la_OBJECTS) $(libpubsub_la_DEPENDENCIES) $(EXTRA_libpubsub_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(libpubsub_la_LINK)  $(libpubsub_la_OBJECTS) $(libpubsub_la_LIBADD) $(LIBS)
@@ -688,6 +693,7 @@ include ../src/$(DEPDIR)/libpubsub_la-messages.Plo # am--include-marker
 include ../src/$(DEPDIR)/libpubsub_la-security.Plo # am--include-marker
 include ../src/$(DEPDIR)/libpubsub_la-sensor_logger.Plo # am--include-marker
 include ../src/$(DEPDIR)/libpubsub_la-sensor_types.Plo # am--include-marker
+include ../src/$(DEPDIR)/libpubsub_la-telemetry.Plo # am--include-marker
 include ../src/$(DEPDIR)/libpubsub_la-transport.Plo # am--include-marker
 include ../src/$(DEPDIR)/libpubsub_la-utils.Plo # am--include-marker
 include ../src/$(DEPDIR)/libpubsub_la-validator.Plo # am--include-marker
@@ -880,6 +886,13 @@ am--depfiles: $(am__depfiles_remade)
 #	$(AM_V_CC)source='../src/security/security_core/security_core.c' object='../src/security/security_core/libpubsub_la-security_core.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpubsub_la_CFLAGS) $(CFLAGS) -c -o ../src/security/security_core/libpubsub_la-security_core.lo `test -f '../src/security/security_core/security_core.c' || echo '$(srcdir)/'`../src/security/security_core/security_core.c
+
+../src/libpubsub_la-telemetry.lo: ../src/telemetry.c
+	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpubsub_la_CFLAGS) $(CFLAGS) -MT ../src/libpubsub_la-telemetry.lo -MD -MP -MF ../src/$(DEPDIR)/libpubsub_la-telemetry.Tpo -c -o ../src/libpubsub_la-telemetry.lo `test -f '../src/telemetry.c' || echo '$(srcdir)/'`../src/telemetry.c
+	$(AM_V_at)$(am__mv) ../src/$(DEPDIR)/libpubsub_la-telemetry.Tpo ../src/$(DEPDIR)/libpubsub_la-telemetry.Plo
+#	$(AM_V_CC)source='../src/telemetry.c' object='../src/libpubsub_la-telemetry.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpubsub_la_CFLAGS) $(CFLAGS) -c -o ../src/libpubsub_la-telemetry.lo `test -f '../src/telemetry.c' || echo '$(srcdir)/'`../src/telemetry.c
 
 PRTP_client-PRTP_client.o: PRTP_client.c
 	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(PRTP_client_CFLAGS) $(CFLAGS) -MT PRTP_client-PRTP_client.o -MD -MP -MF $(DEPDIR)/PRTP_client-PRTP_client.Tpo -c -o PRTP_client-PRTP_client.o `test -f 'PRTP_client.c' || echo '$(srcdir)/'`PRTP_client.c
@@ -1227,6 +1240,7 @@ distclean: distclean-am
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-security.Plo
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-sensor_logger.Plo
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-sensor_types.Plo
+	-rm -f ../src/$(DEPDIR)/libpubsub_la-telemetry.Plo
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-transport.Plo
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-utils.Plo
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-validator.Plo
@@ -1305,6 +1319,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-security.Plo
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-sensor_logger.Plo
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-sensor_types.Plo
+	-rm -f ../src/$(DEPDIR)/libpubsub_la-telemetry.Plo
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-transport.Plo
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-utils.Plo
 	-rm -f ../src/$(DEPDIR)/libpubsub_la-validator.Plo
