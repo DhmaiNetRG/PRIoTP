@@ -28,6 +28,8 @@
 
 #include <string.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 /* --------------------------------------------------------------------------
  * Byte-order helpers (portable, no compiler intrinsics)
@@ -81,18 +83,18 @@ static void be64_store_partial(uint8_t *b, uint64_t v, size_t n)
  * rc[i] = (0xf0 - i*0x10) | (0xc - i)  from the ASCON spec.
  */
 static const uint64_t ROUND_CONSTANTS[12] = {
-    0x000000000000003cULL,  /* round  0 */
-    0x000000000000002dULL,  /* round  1 */
-    0x000000000000001eULL,  /* round  2 */
-    0x000000000000000fULL,  /* round  3 */
-    0x00000000000000f0ULL,  /* round  4 */
-    0x00000000000000e1ULL,  /* round  5 */
-    0x00000000000000d2ULL,  /* round  6 */
-    0x00000000000000c3ULL,  /* round  7 */
-    0x00000000000000b4ULL,  /* round  8 */
-    0x00000000000000a5ULL,  /* round  9 */
-    0x0000000000000096ULL,  /* round 10 */
-    0x0000000000000087ULL   /* round 11 */
+    0x00000000000000f0ULL,  /* round  0 */
+    0x00000000000000e1ULL,  /* round  1 */
+    0x00000000000000d2ULL,  /* round  2 */
+    0x00000000000000c3ULL,  /* round  3 */
+    0x00000000000000b4ULL,  /* round  4 */
+    0x00000000000000a5ULL,  /* round  5 */
+    0x0000000000000096ULL,  /* round  6 */
+    0x0000000000000087ULL,  /* round  7 */
+    0x0000000000000078ULL,  /* round  8 */
+    0x0000000000000069ULL,  /* round  9 */
+    0x000000000000005aULL,  /* round 10 */
+    0x000000000000004bULL   /* round 11 */
 };
 
 /**
@@ -246,6 +248,22 @@ void ascon_aead128_encrypt(
     const uint8_t *pt  = plaintext;
     size_t         len = plaintext_len;
     uint64_t       block;
+    const char *proof_mode = getenv("PRIOTPS_PROOF_MODE");
+    if (proof_mode && strcmp(proof_mode, "1") == 0) {
+        printf("[DEBUG_ASCON]\n");
+        printf("function_name=ascon_aead128_encrypt\n");
+        printf("variant=Ascon-AEAD128\n"); // IV is hardcoded for Ascon-128
+        
+        printf("key_len=16\nkey=");
+        for(int i=0; i<16; i++) printf("%02x", key[i]);
+        printf("\nnonce_len=16\nnonce=");
+        for(int i=0; i<16; i++) printf("%02x", nonce[i]);
+        printf("\naad_len=%zu\naad=", aad_len);
+        for(size_t i=0; i<aad_len; i++) printf("%02x", aad[i]);
+        printf("\nplaintext_len=%zu\nplaintext=", plaintext_len);
+        for(size_t i=0; i<plaintext_len; i++) printf("%02x", plaintext[i]);
+        printf("\n");
+    }
 
     /* 1. Initialization */
     ascon_init(&s, key, nonce);
@@ -280,6 +298,15 @@ void ascon_aead128_encrypt(
 
     /* 4. Finalization — append 16-byte tag */
     ascon_finalize(&s, key, ct);
+
+    const char *proof_mode_end = getenv("PRIOTPS_PROOF_MODE");
+    if (proof_mode_end && strcmp(proof_mode_end, "1") == 0) {
+        printf("ciphertext_len=%zu\nciphertext=", plaintext_len);
+        for(size_t i=0; i<plaintext_len; i++) printf("%02x", ciphertext_and_tag[i]);
+        printf("\ntag=");
+        for(size_t i=0; i<16; i++) printf("%02x", ciphertext_and_tag[plaintext_len + i]);
+        printf("\n");
+    }
 }
 
 /* --------------------------------------------------------------------------

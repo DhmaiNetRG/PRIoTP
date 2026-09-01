@@ -146,6 +146,20 @@ int handshake_server_build_response(
 
     hsk_log("HSK_RESPONSE", session->session_id, "SCT packet built");
 
+    if (getenv("PRIOTPS_PROOF_MODE")) {
+        printf("[PROOF][SESSION_KEY_SERVER]\n\n");
+        printf("server_public=");
+        for(int i=0;i<32;i++) printf("%02x", server_id->public_key[i]);
+        printf("\nserver_private=");
+        for(int i=0;i<32;i++) printf("%02x", server_id->private_key[i]);
+        printf("\nclient_public=");
+        for(int i=0;i<32;i++) printf("%02x", client_pub[i]);
+        printf("\ngenerated_session_key=");
+        for(int i=0;i<16;i++) printf("%02x", session->session_key[i]);
+        printf("\nct1_length=%zu", ct1_len);
+        printf("\nsct_length=%zu\n\n", sct_len);
+    }
+
     if (session_out) *session_out = session;
     return 0;
 }
@@ -217,6 +231,20 @@ int handshake_client_process_response(
     if (session_id_out) *session_id_out = sid;
 
     hsk_log("HSK_SUCCESS", sid, "client extracted session key");
+
+    if (getenv("PRIOTPS_PROOF_MODE")) {
+        printf("[PROOF][SESSION_KEY_CLIENT]\n\n");
+        printf("client_public=");
+        for(int i=0;i<32;i++) printf("%02x", client_id->public_key[i]);
+        printf("\nclient_private=");
+        for(int i=0;i<32;i++) printf("%02x", client_id->private_key[i]);
+        printf("\nserver_public=");
+        for(int i=0;i<32;i++) printf("%02x", server_pub_out[i]);
+        printf("\nsession_key=");
+        for(int i=0;i<16;i++) printf("%02x", session_key_out[i]);
+        printf("\n\n");
+    }
+
     return 0;
 }
 

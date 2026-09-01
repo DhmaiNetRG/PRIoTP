@@ -8,6 +8,7 @@
 #include "../../ascon.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 static int read_random(uint8_t *buf, size_t n) {
     FILE *f = fopen("/dev/urandom", "rb");
@@ -32,6 +33,12 @@ int ecies_encrypt_with_priv(const uint8_t *msg, size_t msg_len,
 
     uint8_t enc_key[16];
     memcpy(enc_key, hash, 16);
+
+    if (getenv("PRIOTPS_PROOF_MODE")) {
+        printf("[PROOF][ECIES_INTERMEDIATE]\nshared_secret_hash=");
+        for(int i=0; i<32; i++) printf("%02x", hash[i]);
+        printf("\n\n");
+    }
 
     uint8_t nonce[16] = {0};
     if (read_random(nonce, 8) != 0) return -1;

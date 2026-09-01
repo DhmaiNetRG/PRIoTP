@@ -406,7 +406,8 @@ int transport_send(struct transport* transport, struct transport_status* status,
         uint32_t sid = sec_ctx->sessions.entries[0].session_id;
         if (security_core_encrypt(sec_ctx, sid,
                                    (const uint8_t *)buf, (size_t)pkt.len,
-                                   (uint8_t *)secured_buf, &secured_len) == 0) {
+                                   (uint8_t *)secured_buf, &secured_len,
+                                   msg->seq_no, msg->timestamp, msg->frag_no) == 0) {
           telemetry_encrypt(sid, (size_t)pkt.len);
           pkt.len = (int)secured_len;
           res = __transport_send(transport, status, &pkt, secured_buf);
@@ -454,7 +455,8 @@ int transport_send(struct transport* transport, struct transport_status* status,
       uint32_t sid = sec_ctx->sessions.entries[0].session_id;
       if (security_core_encrypt(sec_ctx, sid,
                                  (const uint8_t *)buf, (size_t)pkt.len,
-                                 (uint8_t *)secured_buf, &secured_len) == 0) {
+                                 (uint8_t *)secured_buf, &secured_len,
+                                 msg->seq_no, msg->timestamp, msg->frag_no) == 0) {
         telemetry_encrypt(sid, (size_t)pkt.len);
         pkt.len = (int)secured_len;
         return __transport_send(transport, status, &pkt, secured_buf);

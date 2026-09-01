@@ -55,7 +55,8 @@ void security_core_get_pub_key(const priotps_security_ctx_t *ctx,
 int security_core_encrypt(priotps_security_ctx_t *ctx,
                             uint32_t session_id,
                             const uint8_t *plaintext, size_t pt_len,
-                            uint8_t *out, size_t *out_len);
+                            uint8_t *out, size_t *out_len,
+                            uint32_t seq_no, uint32_t timestamp, uint32_t frag_no);
 
 /**
  * @brief Decrypt an incoming wire packet.

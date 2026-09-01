@@ -48,7 +48,7 @@ int send_iotmsg(int sd, const struct PRTP_packet* msg) {
    * If security is disabled the original buf/len are sent unchanged.
    */
   priotps_security_ctx_t *sctx = get_priotps_security_ctx();
-  fprintf(stderr, "[DEBUG] send_iotmsg called. sctx=%p, initialized=%d\n", sctx, sctx ? sctx->initialized : -1);
+  fprintf(stderr, "[DEBUG] send_iotmsg called. sctx=%p, initialized=%d\n", (void*)sctx, sctx ? sctx->initialized : -1);
   if (sctx && sctx->initialized) {
     char secured_buf[BUFSIZE + PRIOTPS_MAX_OVERHEAD];
     size_t secured_len = 0;
@@ -65,7 +65,8 @@ int send_iotmsg(int sd, const struct PRTP_packet* msg) {
     if (session_id != 0) {
         if (security_core_encrypt(sctx, session_id,
                             (const uint8_t *)buf, len,
-                            (uint8_t *)secured_buf, &secured_len) == 0) {
+                            (uint8_t *)secured_buf, &secured_len,
+                            msg->seq_no, msg->timestamp, msg->frag_no) == 0) {
           return send(sd, secured_buf, secured_len, 0);
         }
     }
@@ -110,6 +111,9 @@ struct PRTP_packet* create_iotmsg(enum IOTMSG_TYPE type)
     result = xalloc(sizeof(struct PRTP_packet));
     break;
   case UNSUBSCRIBE:
+    result = xalloc(sizeof(struct PRTP_packet));
+    break;
+  case HANDSHAKE_ACK:
     result = xalloc(sizeof(struct PRTP_packet));
     break;
   }
