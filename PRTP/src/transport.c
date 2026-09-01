@@ -587,7 +587,7 @@ int transport_receive(struct transport* transport, struct PRTP_packet** msg,
 
     /* 2.1 — Handshake response packet from server (SEH_FLAG_HSK = 0) */
     /* Minimum wire size: SEH_HSK_OVERHEAD (41) + ECIES_OVERHEAD*2 (48) + INNER_PAYLOAD (20) = 109 bytes */
-    if (flags == SEH_FLAG_HSK && recvlen >= 109) {
+    if (flags == SEH_FLAG_HSK && recvlen >= 109 && !sec_ctx->is_server) {
       uint8_t session_key[16];
       uint8_t server_pub[32];
       uint32_t session_id = 0;

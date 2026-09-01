@@ -25,7 +25,7 @@ void shutdown_messages()
 int send_iotmsg(int sd, const struct PRTP_packet* msg) {
   char buf[BUFSIZE];
   size_t len = 0;
-  const struct priotps_ctx *sec_ctx;
+
 
   /* Serialize PRTP_packet to BSON */
   len = serialize_iotmsg(msg, buf, BUFSIZE);
@@ -47,15 +47,27 @@ int send_iotmsg(int sd, const struct PRTP_packet* msg) {
    *
    * If security is disabled the original buf/len are sent unchanged.
    */
-  sec_ctx = get_security_ctx();
-  if (sec_ctx->enabled) {
+  priotps_security_ctx_t *sctx = get_priotps_security_ctx();
+  fprintf(stderr, "[DEBUG] send_iotmsg called. sctx=%p, initialized=%d\n", sctx, sctx ? sctx->initialized : -1);
+  if (sctx && sctx->initialized) {
     char secured_buf[BUFSIZE + PRIOTPS_MAX_OVERHEAD];
     size_t secured_len = 0;
+    uint32_t session_id = 0;
 
-    if (priotps_encrypt(sec_ctx, msg,
-                        (const uint8_t *)buf, len,
-                        (uint8_t *)secured_buf, &secured_len) == PRIOTPS_OK) {
-      return send(sd, secured_buf, secured_len, 0);
+    for (int i = 0; i < SESSION_MAX_ENTRIES; i++) {
+        if (sctx->sessions.entries[i].active) {
+            session_id = sctx->sessions.entries[i].session_id;
+            break;
+        }
+    }
+
+    fprintf(stderr, "[DEBUG] session_id=%u\n", session_id);
+    if (session_id != 0) {
+        if (security_core_encrypt(sctx, session_id,
+                            (const uint8_t *)buf, len,
+                            (uint8_t *)secured_buf, &secured_len) == 0) {
+          return send(sd, secured_buf, secured_len, 0);
+        }
     }
 
     log_error(l, "PRIoTPS: send_iotmsg encrypt failed for msg type %u;"

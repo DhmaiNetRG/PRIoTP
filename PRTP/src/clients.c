@@ -173,6 +173,19 @@ int read_client(int sd, struct client_node** ret_node, struct PRTP_packet** msg)
                   if (node) *ret_node = node;
                   return -1;
               }
+              if (peek_len >= 13) {
+                  uint32_t wire_sid = ((uint32_t)((uint8_t)peek_buf[9]) << 24) |
+                                      ((uint32_t)((uint8_t)peek_buf[10]) << 16) |
+                                      ((uint32_t)((uint8_t)peek_buf[11]) << 8) |
+                                      ((uint32_t)((uint8_t)peek_buf[12]));
+                  if (node->session_id != wire_sid) {
+                      recvfrom(sd, peek_buf, sizeof(peek_buf), 0, (struct sockaddr*)&from, &fromlen);
+                      log_error(l, "PRIoTPS: Cross-session spoofing attempt detected. Dropped.\n");
+                      *msg = NULL;
+                      *ret_node = node;
+                      return -1;
+                  }
+              }
               /* Allow standard decrypt/BSON parsing by falling through to transport_receive() */
           }
       }

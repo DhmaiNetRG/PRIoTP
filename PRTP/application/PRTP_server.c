@@ -14,6 +14,7 @@
 #include "../src/clients_config.h"
 #include "../src/q_agent.h"
 #include "../src/telemetry.h"
+#include "../src/security.h"
 
 #define HOSTNAME_SIZE 255
 #define FILENAME_SIZE 255
@@ -285,6 +286,8 @@ int main(int argc, char *argv[])
   int sensor_sd, client_sd;
   
   init_systems();
+  priotps_security_ctx_t *sctx = get_priotps_security_ctx();
+  if (sctx) sctx->is_server = 1;
   
   if( signal(SIGINT, signal_handler) == SIG_IGN )
     signal(SIGINT, SIG_IGN);

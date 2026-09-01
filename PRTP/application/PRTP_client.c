@@ -15,6 +15,7 @@
 #include "../src/bson_parser.h"
 #include "../src/bson_msg.h"
 #include "../src/messages.h"
+#include "../src/security.h"
 #include "../src/subscriptions.h"
 #include "../src/sensor_logger.h"
 #include "../src/fragment_buffer.h"
@@ -210,8 +211,8 @@ void main_loop(int sd)
   struct PRTP_packet* msg = NULL;
   int client_operation=-1;
   struct transport aux_tr;
+  memset(&aux_tr, 0, sizeof(aux_tr));
   aux_tr.sd = sd;
-
 
   fds[0].fd = sd;
   fds[0].events = POLLIN;
@@ -388,9 +389,12 @@ int main(int argc, char *argv[])
   init_bson_parser();
   init_client_module();
   init_transport();
+  priotps_security_ctx_t *sctx = get_priotps_security_ctx();
+  if (sctx) sctx->is_server = 0;
   init_sensor_logger(log_dir);
 
   printf("connceting to %s\n", server_host);
+
   if (localaddr != NULL) {
     sd = init_socket(server_host, server_port, false, localaddr);
   } else {
@@ -399,6 +403,23 @@ int main(int argc, char *argv[])
   if( sd == -1 ) {
     log_error(l, "Socket init failed\n");
     exit(EXIT_FAILURE);
+  }
+
+  // Send PRIoTPS Handshake Request
+  uint8_t hsk_pkt[1024];
+  size_t hsk_len = sizeof(hsk_pkt);
+  fprintf(stderr, "PRIoTPS: Checking if we should send Handshake Request... sctx=%p, initialized=%d\n", sctx, sctx ? sctx->initialized : -1);
+  if (sctx && sctx->initialized) {
+      if (security_core_client_build_subscribe(sctx, hsk_pkt, &hsk_len) == 0) {
+          int ret = send(sd, hsk_pkt, hsk_len, 0);
+          if (ret < 0) {
+              perror("send() Handshake Request failed");
+          } else {
+              fprintf(stderr, "PRIoTPS: Handshake Request sent. len=%zu, ret=%d\n", hsk_len, ret);
+          }
+      } else {
+          fprintf(stderr, "PRIoTPS: build_subscribe failed!\n");
+      }
   }
   
   if( (operation == CLIENT_OPERATION_QUERY_SENSOR_LIST) || (operation == CLIENT_OPERATION_SUBSCRIBE_ALL_SENSORS) ) {

@@ -10,6 +10,7 @@ typedef struct {
     priotps_identity_t  identity;   /* This node's asymmetric key pair */
     priotps_session_table_t sessions; /* Active session table */
     uint8_t  initialized;           /* 1 after security_core_init() */
+    int      is_server;             /* 1 if server, 0 if client */
     char     identity_filepath[256]; /* Path to identity persistence file */
 } priotps_security_ctx_t;
 

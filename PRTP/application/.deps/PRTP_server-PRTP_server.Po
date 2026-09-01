@@ -123,7 +123,11 @@ PRTP_server-PRTP_server.o: PRTP_server.c /usr/include/stdc-predef.h \
  ../src/transport.h ../src/fragment_buffer.h ../src/telemetry.h \
  ../src/bson_parser.h ../src/sensor_parser.h ../src/logger.h \
  ../src/utils.h ../src/sensor_logger.h ../src/clients_config.h \
- ../src/q_agent.h ../src/telemetry.h
+ ../src/q_agent.h ../src/telemetry.h ../src/security.h \
+ ../src/security/security_core/security_core.h \
+ ../src/security/security_core/../identity/identity.h \
+ ../src/security/security_core/../session/session.h \
+ ../src/security/seh/seh.h
 /usr/include/stdc-predef.h:
 /usr/include/unistd.h:
 /usr/include/features.h:
@@ -274,3 +278,8 @@ PRTP_server-PRTP_server.o: PRTP_server.c /usr/include/stdc-predef.h \
 ../src/clients_config.h:
 ../src/q_agent.h:
 ../src/telemetry.h:
+../src/security.h:
+../src/security/security_core/security_core.h:
+../src/security/security_core/../identity/identity.h:
+../src/security/security_core/../session/session.h:
+../src/security/seh/seh.h:

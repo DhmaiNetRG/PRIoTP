@@ -95,7 +95,7 @@ PRTP_client-PRTP_client.o: PRTP_client.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h /usr/include/assert.h \
- /usr/include/arpa/inet.h /usr/include/netinet/in.h \
+ PRTP_client.h ../src/utils.h /usr/include/netinet/in.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/sys/socket.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
@@ -114,24 +114,24 @@ PRTP_client-PRTP_client.o: PRTP_client.c /usr/include/stdc-predef.h \
  /usr/include/asm-generic/sockios.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
  /usr/include/x86_64-linux-gnu/bits/socket2.h \
- /usr/include/x86_64-linux-gnu/bits/in.h PRTP_client.h ../src/utils.h \
+ /usr/include/x86_64-linux-gnu/bits/in.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
  ../src/client_module.h ../src/messages.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h ../src/void_data.h \
  ../src/logger.h ../src/logger.h ../src/bson_parser.h ../src/bson_msg.h \
- ../src/messages.h ../src/subscriptions.h ../src/sensors.h \
+ ../src/messages.h ../src/security.h \
+ ../src/security/security_core/security_core.h \
+ ../src/security/security_core/../identity/identity.h \
+ ../src/security/security_core/../session/session.h \
+ ../src/security/seh/seh.h ../src/subscriptions.h ../src/sensors.h \
  ../src/sensor_types.h ../src/clients.h /usr/include/time.h \
  /usr/include/x86_64-linux-gnu/bits/time.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
  ../src/transport.h ../src/fragment_buffer.h ../src/telemetry.h \
- ../src/sensor_logger.h ../src/fragment_buffer.h ../src/security.h \
- ../src/security/security_core/security_core.h \
- ../src/security/security_core/../identity/identity.h \
- ../src/security/security_core/../session/session.h \
- ../src/security/seh/seh.h ../src/transport.h
+ ../src/sensor_logger.h ../src/fragment_buffer.h
 /usr/include/stdc-predef.h:
 /usr/include/stdlib.h:
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
@@ -241,7 +241,8 @@ PRTP_client-PRTP_client.o: PRTP_client.c /usr/include/stdc-predef.h \
 /usr/include/x86_64-linux-gnu/bits/sigthread.h:
 /usr/include/x86_64-linux-gnu/bits/signal_ext.h:
 /usr/include/assert.h:
-/usr/include/arpa/inet.h:
+PRTP_client.h:
+../src/utils.h:
 /usr/include/netinet/in.h:
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 /usr/include/x86_64-linux-gnu/sys/socket.h:
@@ -263,8 +264,6 @@ PRTP_client-PRTP_client.o: PRTP_client.c /usr/include/stdc-predef.h \
 /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h:
 /usr/include/x86_64-linux-gnu/bits/socket2.h:
 /usr/include/x86_64-linux-gnu/bits/in.h:
-PRTP_client.h:
-../src/utils.h:
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h:
 ../src/client_module.h:
 ../src/messages.h:
@@ -278,6 +277,11 @@ PRTP_client.h:
 ../src/bson_parser.h:
 ../src/bson_msg.h:
 ../src/messages.h:
+../src/security.h:
+../src/security/security_core/security_core.h:
+../src/security/security_core/../identity/identity.h:
+../src/security/security_core/../session/session.h:
+../src/security/seh/seh.h:
 ../src/subscriptions.h:
 ../src/sensors.h:
 ../src/sensor_types.h:
@@ -291,9 +295,3 @@ PRTP_client.h:
 ../src/telemetry.h:
 ../src/sensor_logger.h:
 ../src/fragment_buffer.h:
-../src/security.h:
-../src/security/security_core/security_core.h:
-../src/security/security_core/../identity/identity.h:
-../src/security/security_core/../session/session.h:
-../src/security/seh/seh.h:
-../src/transport.h:
