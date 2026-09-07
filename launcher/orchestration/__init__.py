@@ -1,3 +1,0 @@
-"""
-PRIoTPS process orchestration package.
-"""
