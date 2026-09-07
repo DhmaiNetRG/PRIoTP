@@ -1,1 +1,0 @@
-"""PRIoTPS security event collection."""

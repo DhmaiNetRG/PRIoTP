@@ -1,3 +1,0 @@
-"""
-PRIoTPS telemetry collection package.
-"""
